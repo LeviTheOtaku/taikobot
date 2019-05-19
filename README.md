@@ -9,4 +9,4 @@ https://i.vgy.me/kYjHP5.png
 
 
 1920x1080 non fullscreen chrome: 566, 437
-1920x1080 fullscreen: 653, 385 (not perfect?)
+1920x1080 fullscreen: 648, 385 (not perfect?)
