@@ -1,0 +1,11 @@
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\AutoTaiko.csprojAssemblyReference.cache
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\AutoTaiko.csproj.GenerateResource.cache
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\AutoTaiko.csproj.CoreCompileInputs.cache
+D:\levij\source\repos\AutoTaiko\AutoTaiko\bin\Debug\WindowsInput.xml
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\AutoTaiko.csproj.CopyComplete
+D:\levij\source\repos\AutoTaiko\AutoTaiko\bin\Debug\taikobot.exe.config
+D:\levij\source\repos\AutoTaiko\AutoTaiko\bin\Debug\taikobot.exe
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\AutoTaiko.taikobot.resources
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\taikobot.Properties.Resources.resources
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\AutoTaiko.csproj.Fody.CopyLocal.cache
+D:\levij\source\repos\AutoTaiko\AutoTaiko\obj\Debug\taikobot.exe
