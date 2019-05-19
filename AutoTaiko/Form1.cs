@@ -54,21 +54,28 @@ namespace AutoTaiko
                         {
                             if (typehitred == 1)
                             {
+                                Random rnd = new Random();
+
                                 InputSimulator sim = new InputSimulator();
                                 sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                System.Threading.Thread.Sleep(6);
+                                System.Threading.Thread.Sleep(rnd.Next(20, 26));
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
                                 typehitred = 2;
                                 lastHitPanel.BackColor = Color.FromArgb(255, 0, 0);
                             }
-                            if (typehitred == 2)
+                            else
                             {
-                                InputSimulator sim = new InputSimulator();
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_J);
-                                System.Threading.Thread.Sleep(6);
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_J);
-                                typehitred = 1;
-                                lastHitPanel.BackColor = Color.FromArgb(240, 100, 100);
+                                if (typehitred == 2)
+                                {
+                                    Random rnd = new Random();
+
+                                    InputSimulator sim = new InputSimulator();
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_J);
+                                    System.Threading.Thread.Sleep(rnd.Next(20, 26));
+                                    sim.Keyboard.KeyUp(VirtualKeyCode.VK_J);
+                                    typehitred = 1;
+                                    lastHitPanel.BackColor = Color.FromArgb(240, 100, 100);
+                                }
                             }
                         }
                     }
@@ -81,21 +88,28 @@ namespace AutoTaiko
                         {
                             if (typehitblue == 1)
                             {
+                                Random rnd = new Random();
+
                                 InputSimulator sim = new InputSimulator();
                                 sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                System.Threading.Thread.Sleep(6);
+                                System.Threading.Thread.Sleep(rnd.Next(20, 26));
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
                                 typehitblue = 2;
                                 lastHitPanel.BackColor = Color.FromArgb(0, 0, 255);
                             }
-                            if (typehitblue == 2)
+                            else
                             {
-                                InputSimulator sim = new InputSimulator();
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_K);
-                                System.Threading.Thread.Sleep(6);
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_K);
-                                typehitblue = 1;
-                                lastHitPanel.BackColor = Color.FromArgb(100, 100, 240);
+                                if (typehitblue == 2)
+                                {
+                                    Random rnd = new Random();
+
+                                    InputSimulator sim = new InputSimulator();
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_K);
+                                    System.Threading.Thread.Sleep(rnd.Next(20, 26));
+                                    sim.Keyboard.KeyUp(VirtualKeyCode.VK_K);
+                                    typehitblue = 1;
+                                    lastHitPanel.BackColor = Color.FromArgb(100, 100, 240);
+                                }
                             }
                         }
                     }

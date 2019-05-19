@@ -69,7 +69,7 @@
             this.xBox.Name = "xBox";
             this.xBox.Size = new System.Drawing.Size(56, 20);
             this.xBox.TabIndex = 2;
-            this.xBox.Text = "570";
+            this.xBox.Text = "566";
             // 
             // yBox
             // 
@@ -77,7 +77,7 @@
             this.yBox.Name = "yBox";
             this.yBox.Size = new System.Drawing.Size(56, 20);
             this.yBox.TabIndex = 3;
-            this.yBox.Text = "433";
+            this.yBox.Text = "437";
             // 
             // seenPanel
             // 
