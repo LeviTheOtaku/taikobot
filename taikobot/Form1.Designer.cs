@@ -1,4 +1,4 @@
-﻿namespace AutoTaiko
+﻿namespace taikobot
 {
     partial class taikobot
     {

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using WindowsInput;
 using WindowsInput.Native;
 
-namespace AutoTaiko
+namespace taikobot
 {
     public partial class taikobot : Form
 
