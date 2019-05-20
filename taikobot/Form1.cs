@@ -20,149 +20,151 @@ namespace AutoTaiko
         public taikobot()
         {
             InitializeComponent();
-            
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(KeyDownHandler);
         }
 
+        //CO-ORDINATES CONTROL
+        private void KeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F2")
+            {
+                xBox.Text = System.Windows.Forms.Cursor.Position.X.ToString();
+                yBox.Text = System.Windows.Forms.Cursor.Position.Y.ToString();
+            }
+
+            if (e.KeyCode.ToString() == "NumPad8")
+            {
+                yBox.Text = (Convert.ToInt32(yBox.Text) + 1).ToString();
+            }
+            if (e.KeyCode.ToString() == "NumPad5")
+            {
+                yBox.Text = (Convert.ToInt32(yBox.Text) - 1).ToString();
+            }
+
+            if (e.KeyCode.ToString() == "NumPad6")
+            {
+                xBox.Text = (Convert.ToInt32(xBox.Text) + 1).ToString();
+            }
+            if (e.KeyCode.ToString() == "NumPad4")
+            {
+                xBox.Text = (Convert.ToInt32(xBox.Text) - 1).ToString();
+            }
+        }
+
+        //GLOBAL VALUES
         int typehitred = 1;
         int typehitblue = 1;
 
-        private void Check_Tick(object sender, EventArgs e)
+        //KEYPRESS FUNCTION
+        public async void CustomKeyPress(VirtualKeyCode vk, int wait1, int wait2)
+        {
+            Random rnd = new Random();
+            InputSimulator sim = new InputSimulator();
+            sim.Keyboard.KeyDown(vk);
+            await Task.Delay(rnd.Next(wait1, wait2));
+            sim.Keyboard.KeyUp(vk);
+        }
+
+        //GRABBING PIXEL FUNCTION
+        static Color GetPixelColor(int xPixel, int yPixel)
         {
             try
             {
-                var x = Convert.ToInt32(xBox.Text);
-                var y = Convert.ToInt32(yBox.Text);
-                Rectangle rect = new Rectangle(x, y, 2, 2);
+                var x = Convert.ToInt32(xPixel);
+                var y = Convert.ToInt32(yPixel);
+                Rectangle rect = new Rectangle(x, y, 1, 1);
                 Bitmap screenshot = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb);
                 Graphics screenGraph = Graphics.FromImage(screenshot);
                 screenGraph.CopyFromScreen(rect.Left, rect.Top, 0, 0, screenshot.Size, CopyPixelOperation.SourceCopy);
 
-
-                screenshot.Save("Screenshot.png", System.Drawing.Imaging.ImageFormat.Png);
-
-            Color target = screenshot.GetPixel(1, 1);
+                Color target = screenshot.GetPixel(0, 0);
                 screenshot.Dispose();
                 screenGraph.Dispose();
 
+                return target;
+            }
+            catch
+            {
+                Color target = Color.FromArgb(0, 0, 0);
+                return target;
+            }
+        }
+
+        //MAIN FUNCTION
+        private void Check_Tick(object sender, EventArgs e)
+        {
+                Color target = GetPixelColor(Convert.ToInt32(xBox.Text), Convert.ToInt32(yBox.Text));
                 seenPanel.BackColor = target;
 
-                if (target.R == 243)
+                // RED ONES!
+                if (target.R == 243 && target.G == 71 && target.B == 40)
                 {
-                    if (target.G == 71)
+                    if (typehitred == 1)
                     {
-                        if (target.B == 40)
-                        {
-                            if (typehitred == 1)
-                            {
-                                Random rnd = new Random();
+                        CustomKeyPress(VirtualKeyCode.VK_F, 20, 26);
+                        typehitred = 2;
+                        lastHitPanel.BackColor = Color.FromArgb(243, 71, 40);
 
-                                InputSimulator sim = new InputSimulator();
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                System.Threading.Thread.Sleep(rnd.Next(20, 26));
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-                                typehitred = 2;
-                                lastHitPanel.BackColor = Color.FromArgb(255, 0, 0);
-                            }
-                            else
-                            {
-                                if (typehitred == 2)
-                                {
-                                    Random rnd = new Random();
-
-                                    InputSimulator sim = new InputSimulator();
-                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_J);
-                                    System.Threading.Thread.Sleep(rnd.Next(20, 26));
-                                    sim.Keyboard.KeyUp(VirtualKeyCode.VK_J);
-                                    typehitred = 1;
-                                    lastHitPanel.BackColor = Color.FromArgb(240, 100, 100);
-                                }
-                            }
-                        }
                     }
-                }
-                if (target.R == 101)
-                {
-                    if (target.G == 189)
+                    else
                     {
-                        if (target.B == 187)
+                        if (typehitred == 2)
                         {
-                            if (typehitblue == 1)
-                            {
-                                Random rnd = new Random();
-
-                                InputSimulator sim = new InputSimulator();
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                System.Threading.Thread.Sleep(rnd.Next(20, 26));
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-                                typehitblue = 2;
-                                lastHitPanel.BackColor = Color.FromArgb(0, 0, 255);
-                            }
-                            else
-                            {
-                                if (typehitblue == 2)
-                                {
-                                    Random rnd = new Random();
-
-                                    InputSimulator sim = new InputSimulator();
-                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_K);
-                                    System.Threading.Thread.Sleep(rnd.Next(20, 26));
-                                    sim.Keyboard.KeyUp(VirtualKeyCode.VK_K);
-                                    typehitblue = 1;
-                                    lastHitPanel.BackColor = Color.FromArgb(100, 100, 240);
-                                }
-                            }
-                        }
-                    }
-                }
-                if (target.R == 243)
-                {
-                    if (target.G == 181)
-                    {
-                        if (target.B == 0)
-                        {
-                            InputSimulator sim = new InputSimulator();
-                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                            System.Threading.Thread.Sleep(7);
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-                            lastHitPanel.BackColor = Color.FromArgb(243, 181, 0);
-                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_J);
-                            System.Threading.Thread.Sleep(7);
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_J);
-                            lastHitPanel.BackColor = Color.FromArgb(233, 171, 0);
-                        }
-                    }
-                }
-                if (target.R == 248)
-                {
-                    if (target.G == 119)
-                    {
-                        if (target.B == 0)
-                        {
-                            InputSimulator sim = new InputSimulator();
-                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                            System.Threading.Thread.Sleep(7);
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-                            lastHitPanel.BackColor = Color.FromArgb(248, 119, 0);
-                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_J);
-                            System.Threading.Thread.Sleep(7);
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_J);
-                            lastHitPanel.BackColor = Color.FromArgb(238, 109, 0);
+                            CustomKeyPress(VirtualKeyCode.VK_J, 20, 26);
+                            typehitred = 1;
+                            lastHitPanel.BackColor = Color.FromArgb(233, 61, 30);
                         }
                     }
                 }
 
-            }
-            catch { }
+                
+                // BLUE ONES
+                if (target.R == 101 && target.G == 189 && target.B == 187)
+                {
+                    if (typehitblue == 1)
+                    {
+                        CustomKeyPress(VirtualKeyCode.VK_D, 20, 26);
+                        typehitblue = 2;
+                        lastHitPanel.BackColor = Color.FromArgb(101, 189, 187);
+                    }
+                    else
+                    {
+                        if (typehitblue == 2)
+                        {
+                            CustomKeyPress(VirtualKeyCode.VK_K, 20, 26);
+                            typehitblue = 1;
+                            lastHitPanel.BackColor = Color.FromArgb(91, 179, 177);
+                        }
+                    }
+                }
+                
+                //BALLOON/DRUMROLL
+                if (target.R == 243 && target.G == 181 && target.B == 0)
+                {
+                    CustomKeyPress(VirtualKeyCode.VK_F, 7, 13);
+                    CustomKeyPress(VirtualKeyCode.VK_J, 7, 13);
+                    lastHitPanel.BackColor = Color.FromArgb(243, 181, 0);
+                }
+
+                //BALLOON/DRUMROLL
+                if (target.R == 248 && target.G == 119 && target.B == 0)
+                {
+                    CustomKeyPress(VirtualKeyCode.VK_F, 7, 13);
+                    CustomKeyPress(VirtualKeyCode.VK_J, 7, 13);
+                    lastHitPanel.BackColor = Color.FromArgb(248, 119, 0);
+                }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Check.Stop();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
             Check.Start();
         }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            Check.Stop();
+        }
     }
+
 }
